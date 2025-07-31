@@ -132,29 +132,27 @@ function renderCourses() {
       div.appendChild(code);
       div.appendChild(title);
       div.appendChild(tooltip);
-
-      if (status !== 'locked') {
+//miauuuuuuu
+      if (status !== 'locked' || courseState[course.code] === 'completed') {
   div.addEventListener('click', () => {
-    // Si ya estaba completado, lo desmarca
+    // Alterna entre completado y no completado
     if (courseState[course.code] === 'completed') {
       courseState[course.code] = 'unlocked';
     } else {
       courseState[course.code] = 'completed';
     }
 
-    // Actualiza los cursos que dependían de este ACA ESTA LO Q ACTUALIZASTE
-    course.unlocks.forEach(cod => {
-      const nextCourse = courses.find(c => c.code === cod);
-      courseState[cod] = getCourseStatus(nextCourse);
-     });
+    // Recalcula el estado de todos los cursos
+    courses.forEach(c => {
+      if (courseState[c.code] !== 'completed') {
+        courseState[c.code] = getCourseStatus(c);
+      }
+    });
+
     renderCourses();
   });
 }
-          });
-          renderCourses();
-        });
-      }
-
+//miauuuu al cuadrado
       column.appendChild(div);
     });
 
