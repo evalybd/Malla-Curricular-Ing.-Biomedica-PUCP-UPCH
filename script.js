@@ -140,7 +140,19 @@ function renderCourses() {
             if (courseState[cod] !== 'completed') {
               const nextCourse = courses.find(c => c.code === cod);
               courseState[cod] = getCourseStatus(nextCourse);
-            }
+            } //AQUI ESTA LO AÑADIDO DE LOS CLICKS NO TE OLVIDESSS
+      if (status !== 'locked') {
+  div.addEventListener('click', () => {
+    courseState[course.code] = 'completed';
+    course.unlocks.forEach(cod => {
+      if (courseState[cod] !== 'completed') {
+        const nextCourse = courses.find(c => c.code === cod);
+        courseState[cod] = getCourseStatus(nextCourse);
+      }
+    });
+    renderCourses();
+  });
+}
           });
           renderCourses();
         });
