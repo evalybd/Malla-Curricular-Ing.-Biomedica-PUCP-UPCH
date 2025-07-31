@@ -20,9 +20,8 @@ p {
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   gap: 2rem;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -34,6 +33,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 220px;
 }
 
 .ciclo h2 {
