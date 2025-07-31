@@ -15,8 +15,7 @@ const cursos = [
   { ciclo: 2, orden: 5, id: "1CAY38", nombre: "Química general", requisitos: [], desbloquea: ["1CAY06", "1CAY07"] },
   { ciclo: 2, orden: 6, id: "1CAY39", nombre: "Procesos de innovación", requisitos: [], desbloquea: ["1CAY41"] },
   { ciclo: 2, orden: 7, id: "CDR123", nombre: "Pens. cristiano y sociedad", requisitos: [], desbloquea: [] },
-
-  // Ciclo 3
+// Ciclo 3
   { ciclo: 3, orden: 1, id: "1MAT07", nombre: "Cálculo integral", requisitos: ["1MAT06"], desbloquea: ["1MAT23"] },
   { ciclo: 3, orden: 2, id: "1FIS04", nombre: "Física 2", requisitos: ["1FIS02", "1FIS03"], desbloquea: ["1FIS06"] },
   { ciclo: 3, orden: 3, id: "1FIS05", nombre: "Lab de física 2", requisitos: ["1FIS02"], desbloquea: ["1FIS06"] },
@@ -143,4 +142,3 @@ function actualizarMalla() {
 }
 
 actualizarMalla();
-
