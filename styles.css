@@ -20,8 +20,10 @@ p {
 
 #malla {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .ciclo {
@@ -31,6 +33,7 @@ p {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .ciclo h2 {
@@ -42,7 +45,8 @@ p {
 .cursos {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
+  width: 100%;
 }
 
 .curso {
@@ -54,6 +58,7 @@ p {
   text-align: center;
   transition: background-color 0.3s, transform 0.2s;
   white-space: pre-line;
+  min-height: 80px;
 }
 
 .curso:hover {
