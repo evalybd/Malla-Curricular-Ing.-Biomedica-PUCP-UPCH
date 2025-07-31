@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malla Interactiva - Ingeniería Biomédica PUCP-UPCH</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular - Ingeniería Biomédica PUCP-UPCH</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Carga segura si falla el CSS externo */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5fafd;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Malla Curricular Interactiva</h1>
     <h2>Ingeniería Biomédica PUCP - UPCH</h2>
+    <p>Haz clic en los cursos para marcarlos como aprobados. Los cursos con requisitos se desbloquearán automáticamente.</p>
   </header>
-  <main id="grid"></main>
-  <script src="script.js"></script>
+
+  <main id="grid" aria-live="polite"></main>
+
+  <noscript>
+    <p style="text-align: center; color: red;">
+      Esta página requiere JavaScript habilitado para funcionar correctamente.
+    </p>
+  </noscript>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
