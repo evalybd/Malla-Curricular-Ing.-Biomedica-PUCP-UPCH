@@ -2,17 +2,69 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Malla Curricular Interactiva</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Interactiva Biomédica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f0fa;
+      color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #malla {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    .ciclo {
+      background: #f0f8ff;
+      border-radius: 10px;
+      padding: 10px;
+      min-width: 200px;
+      flex-shrink: 0;
+    }
+
+    .cursos {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .curso {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      background: #e0eaff;
+      white-space: pre-line;
+    }
+
+    .curso:hover {
+      background: #d0e0ff;
+    }
+
+    .aprobado {
+      background: #a4e3a4;
+      text-decoration: line-through;
+    }
+
+    .bloqueado {
+      background: #f0f0f0;
+      color: #aaa;
+      cursor: not-allowed;
+    }
+
+    #info {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #c00;
+    }
+  </style>
 </head>
 <body>
-  <h1>💙 Malla Curricular Interactiva - Ingeniería Biomedica PUCP-UPCH</h1>
-  <p>Bienvenido Nicolas, haz clic en los cursos aprobados para desbloquear los siguientes💞💡</p>
-
-  <div id="info" class="info"></div>
-  <div id="malla" class="contenedor-malla"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  <h1>
