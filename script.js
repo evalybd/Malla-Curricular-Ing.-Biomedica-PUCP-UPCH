@@ -91,47 +91,81 @@ function getCourseStatus(course) {
 function renderCourses() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
+
+  // Agrupar cursos por ciclo
+  const grouped = {};
   courses.forEach(course => {
-    const status = courseState[course.code] || getCourseStatus(course);
-    courseState[course.code] = status;
-
-    const div = document.createElement('div');
-    div.className = `course ${status}`;
-    div.dataset.code = course.code;
-
-    const code = document.createElement('div');
-    code.className = 'code';
-    code.textContent = course.code;
-
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.textContent = course.title;
-
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    if (status === 'locked') {
-      tooltip.textContent = `Falta: ${course.requirements.filter(req => courseState[req] !== 'completed').join(', ')}`;
-    }
-
-    div.appendChild(code);
-    div.appendChild(title);
-    div.appendChild(tooltip);
-
-    if (status !== 'locked') {
-      div.addEventListener('click', () => {
-        courseState[course.code] = 'completed';
-        course.unlocks.forEach(cod => {
-          if (courseState[cod] !== 'completed') {
-            const nextCourse = courses.find(c => c.code === cod);
-            courseState[cod] = getCourseStatus(nextCourse);
-          }
-        });
-        renderCourses();
-      });
-    }
-
-    grid.appendChild(div);
+    const cycle = getCycleFromCode(course.code);
+    if (!grouped[cycle]) grouped[cycle] = [];
+    grouped[cycle].push(course);
   });
+
+  // Crear columnas por ciclo
+  Object.keys(grouped).sort().forEach(cycle => {
+    const column = document.createElement('div');
+    column.className = 'cycle-column';
+
+    const heading = document.createElement('h3');
+    heading.textContent = `Ciclo ${cycle}`;
+    column.appendChild(heading);
+
+    grouped[cycle].forEach(course => {
+      const status = courseState[course.code] || getCourseStatus(course);
+      courseState[course.code] = status;
+
+      const div = document.createElement('div');
+      div.className = `course ${status}`;
+      div.dataset.code = course.code;
+
+      const code = document.createElement('div');
+      code.className = 'code';
+      code.textContent = course.code;
+
+      const title = document.createElement('div');
+      title.className = 'title';
+      title.textContent = course.title;
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'tooltip';
+      if (status === 'locked') {
+        tooltip.textContent = `Falta: ${course.requirements.filter(req => courseState[req] !== 'completed').join(', ')}`;
+      }
+
+      div.appendChild(code);
+      div.appendChild(title);
+      div.appendChild(tooltip);
+
+      if (status !== 'locked') {
+        div.addEventListener('click', () => {
+          courseState[course.code] = 'completed';
+          course.unlocks.forEach(cod => {
+            if (courseState[cod] !== 'completed') {
+              const nextCourse = courses.find(c => c.code === cod);
+              courseState[cod] = getCourseStatus(nextCourse);
+            }
+          });
+          renderCourses();
+        });
+      }
+
+      column.appendChild(div);
+    });
+
+    grid.appendChild(column);
+  });
+}
+
+function getCycleFromCode(code) {
+  if (code.startsWith('1MAT04') || code === '1CAY01' || code === '1CAY42' || code === '1CAY04' || code === '1FIS01' || code === '1MAT05') return 1;
+  if (['1MAT06','1FIS02','1FIS03','1ING03','1CAY38','1CAY39','CDR123'].includes(code)) return 2;
+  if (['1MAT07','1FIS04','1FIS05','1INF01','1CAY06','1CAY07'].includes(code)) return 3;
+  if (['1MAT23','1FIS06','1FIS07','1CAY40','1IEE08','1CAY41'].includes(code)) return 4;
+  if (['1MAT32','1CAY44','1CAY45','1CAY46','1IBM14','1IEE09'].includes(code)) return 5;
+  if (['1CAY14','1CAY47','1CAY48','1ING06','1IEE10','1ING09'].includes(code)) return 6;
+  if (['1CAY15','1CAY43','1CAY49','1CAY50','1CAY51','1IBM15','1ING07'].includes(code)) return 7;
+  if (['1IBM16','1CAY21','1CAY36','1CAY52','1IBM03','1ING10','ING340'].includes(code)) return 8;
+  if (['1CAY53','1CAY37','1CAY54','1IBM18'].includes(code)) return 9;
+  return 10;
 }
 
 renderCourses();
