@@ -1,3 +1,5 @@
+// script.js
+
 const cursos = {
   // Ciclo 1
   "1MAT04": { nombre: "Álgebra matricial y geometría analítica", ciclo: 1, abre: ["1MAT06", "1MAT07"], req: [] },
@@ -24,7 +26,7 @@ const cursos = {
   "1CAY06": { nombre: "Química orgánica", ciclo: 3, abre: ["1CAY40", "1CAY45"], req: ["1CAY38"] },
   "1CAY07": { nombre: "Biología", ciclo: 3, abre: ["1CAY44", "1CAY45"], req: ["1CAY06"] },
 
-// Ciclo 4
+  // Ciclo 4
   "1MAT23": { nombre: "Cálculo vectorial", ciclo: 4, abre: ["1MAT32", "1CAY43"], req: ["1MAT07"] },
   "1FIS06": { nombre: "Física 3", ciclo: 4, abre: ["1IBM14", "1IBM15"], req: ["1FIS04", "1FIS05"] },
   "1FIS07": { nombre: "Laboratorio de Física 3", ciclo: 4, abre: [], req: ["1FIS06"] },
@@ -85,7 +87,6 @@ const cursos = {
   "ELECTIVO7": { nombre: "Curso electivo 5", ciclo: 10, abre: [], req: [] },
   "ELECTIVO8": { nombre: "Curso electivo 6", ciclo: 10, abre: [], req: [] }
 };
-
 
 const malla = document.getElementById("malla");
 
