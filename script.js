@@ -31,7 +31,60 @@ const cursos = [
   { ciclo: 4, orden: 4, id: "1CAY40", nombre: "Análisis instrumental", requisitos: ["1CAY06"], desbloquea: [] },
   { ciclo: 4, orden: 5, id: "1IEE08", nombre: "Circuitos eléctricos", requisitos: [], desbloquea: ["1IEE09"] },
   { ciclo: 4, orden: 6, id: "1CAY41", nombre: "Fund. de biodiseño", requisitos: ["1CAY39"], desbloquea: [] }
-  // Continúa igual para ciclos 5 a 10 con campo "orden" para ordenarlos izquierda a derecha
+  
+  // Ciclo 5
+  { ciclo: 5, orden: 1, id: "1MAT32", nombre: "Series y Transformadas", requisitos: ["1MAT23"], desbloquea: ["1IBM03", "1ING09"] },
+  { ciclo: 5, orden: 2, id: "1CAY44", nombre: "Anatomía y Fisiología", requisitos: ["1CAY07"], desbloquea: ["1CAY49"] },
+  { ciclo: 5, orden: 3, id: "1CAY45", nombre: "Bioquímica", requisitos: ["1CAY06", "1CAY07"], desbloquea: ["1CAY14", "1CAY47"] },
+  { ciclo: 5, orden: 4, id: "1CAY46", nombre: "Programación Avanzada", requisitos: ["1INF01"], desbloquea: [] },
+  { ciclo: 5, orden: 5, id: "1IBM14", nombre: "Ciencia e Ing. Materiales", requisitos: ["1FIS06"], desbloquea: ["1ING06", "1ING07"] },
+  { ciclo: 5, orden: 6, id: "1IEE09", nombre: "Circuitos y Sistemas Digitales", requisitos: ["1INF01", "1IEE08"], desbloquea: ["1IEE10"] },
+
+  // Ciclo 6 
+  { ciclo: 6, orden: 1, id: "1CAY14", nombre: "Microbiología", requisitos: ["1CAY45"], desbloquea: ["1CAY21"] },
+  { ciclo: 6, orden: 2, id: "1CAY47", nombre: "Molecular Biology", requisitos: ["1CAY45"], desbloquea: [] },
+  { ciclo: 6, orden: 3, id: "1CAY48", nombre: "Proyectos Biodiseño 1", requisitos: ["1FIS06"], desbloquea: ["1IBM15"] },
+  { ciclo: 6, orden: 4, id: "1ING06", nombre: "Mecánica de Biomateriales", requisitos: ["1IBM14"], desbloquea: ["1ING10"] },
+  { ciclo: 6, orden: 5, id: "1IEE10", nombre: "Electrónica Básica", requisitos: ["1IEE09"], desbloquea: ["1CAY50", "1CAY51"] },
+  { ciclo: 6, orden: 6, id: "1ING09", nombre: "Digital Signal Processing", requisitos: ["1MAT32"], desbloquea: ["ING340"] },
+
+  // Ciclo 7
+  { ciclo: 7, orden: 1, id: "1CAY15", nombre: "Mecánica y Transporte", requisitos: [], desbloquea: [] },
+  { ciclo: 7, orden: 2, id: "1CAY43", nombre: "Bioestadística", requisitos: ["1MAT23"], desbloquea: [] },
+  { ciclo: 7, orden: 3, id: "1CAY49", nombre: "Fisiopatología", requisitos: ["1CAY44"], desbloquea: [] },
+  { ciclo: 7, orden: 4, id: "1CAY50", nombre: "Instrumentación Biomédica", requisitos: ["1IEE10"], desbloquea: ["1IBM16"] },
+  { ciclo: 7, orden: 5, id: "1CAY51", nombre: "Intro Señales Biomédicas", requisitos: ["1IEE10"], desbloquea: [] },
+  { ciclo: 7, orden: 6, id: "1IBM15", nombre: "Proy. Biodiseño 2", requisitos: ["1CAY48"], desbloquea: ["1CAY52"] },
+  { ciclo: 7, orden: 7, id: "1ING07", nombre: "Biomateriales", requisitos: ["1IBM14"], desbloquea: [] },
+
+  // Ciclo 8
+  { ciclo: 8, orden: 1, id: "1IBM16", nombre: "Ingeniería Clínica 1", requisitos: ["1CAY50"], desbloquea: ["1CAY53"] },
+  { ciclo: 8, orden: 2, id: "1CAY21", nombre: "Ing. de Tejidos", requisitos: ["1CAY14"], desbloquea: [] },
+  { ciclo: 8, orden: 3, id: "1CAY36", nombre: "Antropología", requisitos: [], desbloquea: [] },
+  { ciclo: 8, orden: 4, id: "1CAY52", nombre: "Modelos de Negocio", requisitos: ["1IBM15"], desbloquea: ["1CAY57"] },
+  { ciclo: 8, orden: 5, id: "1IBM03", nombre: "Teoría de Control", requisitos: ["1MAT32"], desbloquea: [] },
+  { ciclo: 8, orden: 6, id: "1ING10", nombre: "Biomecánica", requisitos: ["1ING06"], desbloquea: [] },
+  { ciclo: 8, orden: 7, id: "ING340", nombre: "Intro Medical Imaging", requisitos: ["1ING09"], desbloquea: [] },
+
+  // Ciclo 9
+  { ciclo: 9, orden: 1, id: "1CAY53", nombre: "Ing. Clínica 2", requisitos: ["1IBM16"], desbloquea: [] },
+  { ciclo: 9, orden: 2, id: "1CAY37", nombre: "Ética", requisitos: [], desbloquea: [] },
+  { ciclo: 9, orden: 3, id: "1CAY54", nombre: "Des. Prof. 1", requisitos: [], desbloquea: ["1IBM18"] },
+  { ciclo: 9, orden: 4, id: "1IBM18", nombre: "Des. Prof. 2", requisitos: ["1CAY54"], desbloquea: [] },
+  { ciclo: 9, orden: 5, id: "TESIS1", nombre: "Electivo Tesis 1", requisitos: [], desbloquea: [] },
+  { ciclo: 9, orden: 6, id: "ELEC9A", nombre: "Electivo 1", requisitos: [], desbloquea: [] },
+  { ciclo: 9, orden: 7, id: "ELEC9B", nombre: "Electivo 2", requisitos: [], desbloquea: [] },
+
+  // Ciclo 10
+  { ciclo: 10, orden: 1, id: "1CAY56", nombre: "Des. Prof. 3", requisitos: [], desbloquea: ["1IBM19"] },
+  { ciclo: 10, orden: 2, id: "1CAY57", nombre: "Normas y Regulaciones", requisitos: ["1CAY52"], desbloquea: [] },
+  { ciclo: 10, orden: 3, id: "1IBM19", nombre: "Des. Prof. 4", requisitos: ["1CAY56"], desbloquea: [] },
+  { ciclo: 10, orden: 4, id: "TESIS2", nombre: "Electivo Tesis 2", requisitos: [], desbloquea: [] },
+  { ciclo: 10, orden: 5, id: "ELEC10A", nombre: "Electivo 3", requisitos: [], desbloquea: [] },
+  { ciclo: 10, orden: 6, id: "ELEC10B", nombre: "Electivo 4", requisitos: [], desbloquea: [] },
+  { ciclo: 10, orden: 7, id: "ELEC10C", nombre: "Electivo 5", requisitos: [], desbloquea: [] },
+  { ciclo: 10, orden: 8, id: "ELEC10D", nombre: "Electivo 6", requisitos: [], desbloquea: [] }
+];
 ];
 
 const aprobados = new Set();
