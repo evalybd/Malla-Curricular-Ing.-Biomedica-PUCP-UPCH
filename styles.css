@@ -19,10 +19,11 @@ p {
 }
 
 #malla {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  display: flex;
   gap: 2rem;
-  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
 }
 
 .ciclo {
@@ -86,4 +87,8 @@ p {
   font-size: 1rem;
   color: #c0392b;
   min-height: 2em;
+}
+.ciclo {
+  scroll-snap-align: start;
+  min-width: 220px;
 }
