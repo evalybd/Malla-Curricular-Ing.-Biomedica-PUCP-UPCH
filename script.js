@@ -85,7 +85,6 @@ const cursos = [
   { ciclo: 10, orden: 7, id: "ELEC10C", nombre: "Electivo 5", requisitos: [], desbloquea: [] },
   { ciclo: 10, orden: 8, id: "ELEC10D", nombre: "Electivo 6", requisitos: [], desbloquea: [] }
 ];
-];
 
 const aprobados = new Set();
 const malla = document.getElementById("malla");
@@ -94,6 +93,7 @@ const info = document.getElementById("info");
 function actualizarMalla() {
   malla.innerHTML = "";
   const porCiclo = {};
+
   cursos.forEach(c => {
     if (!porCiclo[c.ciclo]) porCiclo[c.ciclo] = [];
     porCiclo[c.ciclo].push(c);
@@ -143,3 +143,4 @@ function actualizarMalla() {
 }
 
 actualizarMalla();
+
