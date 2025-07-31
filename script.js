@@ -1,151 +1,137 @@
-// script.js
+// script.js - Versión completa con todos los cursos y dependencias
 
-const cursos = {
-  // Ciclo 1
-  "1MAT04": { nombre: "Álgebra matricial y geometría analítica", ciclo: 1, abre: ["1MAT06", "1MAT07"], req: [] },
-  "1MAT05": { nombre: "Fundamentos de cálculo", ciclo: 1, abre: ["1MAT06"], req: [] },
-  "1FIS01": { nombre: "Fundamentos de física", ciclo: 1, abre: ["1FIS02"], req: [] },
-  "1CAY01": { nombre: "Intro a la ingeniería biomédica", ciclo: 1, abre: [], req: [] },
-  "1CAY04": { nombre: "Comunicación y redacción", ciclo: 1, abre: [], req: [] },
-  "1CAY42": { nombre: "Filosofía", ciclo: 1, abre: [], req: [] },
+const courses = [
+  // Primer Ciclo
+  { code: "1MAT04", title: "Álgebra matricial y geometría analítica", unlocks: ["1MAT06", "1MAT07"], requirements: [] },
+  { code: "1MAT05", title: "Fundamentos de cálculo", unlocks: ["1MAT06"], requirements: [] },
+  { code: "1FIS01", title: "Fundamentos de física", unlocks: ["1FIS02"], requirements: [] },
+  { code: "1CAY01", title: "Introducción a la ingeniería biomédica", unlocks: [], requirements: [] },
+  { code: "1CAY04", title: "Comunicación y redacción", unlocks: [], requirements: [] },
+  { code: "1CAY42", title: "Filosofía", unlocks: [], requirements: [] },
 
-  // Ciclo 2
-  "1MAT06": { nombre: "Cálculo diferencial", ciclo: 2, abre: ["1MAT07"], req: ["1MAT04", "1MAT05"] },
-  "1FIS02": { nombre: "Física 1", ciclo: 2, abre: ["1FIS04"], req: ["1FIS01"] },
-  "1FIS03": { nombre: "Laboratorio de Física 1", ciclo: 2, abre: ["1FIS04"], req: ["1FIS01"] },
-  "1ING03": { nombre: "Diseño industrial", ciclo: 2, abre: [], req: [] },
-  "1CAY38": { nombre: "Química general", ciclo: 2, abre: ["1CAY06", "1CAY07"], req: [] },
-  "1CAY39": { nombre: "Procesos de innovación en bioingeniería", ciclo: 2, abre: ["1CAY41"], req: [] },
-  "CDR123": { nombre: "Pensamiento cristiano y realidad social", ciclo: 2, abre: [], req: [] },
+  // Segundo Ciclo
+  { code: "1MAT06", title: "Cálculo diferencial", unlocks: ["1MAT07"], requirements: ["1MAT04", "1MAT05"] },
+  { code: "1FIS02", title: "Física 1", unlocks: ["1FIS04"], requirements: ["1FIS01"] },
+  { code: "1FIS03", title: "Laboratorio de física 1", unlocks: ["1FIS04"], requirements: [] },
+  { code: "1ING03", title: "Diseño industrial", unlocks: [], requirements: [] },
+  { code: "1CAY38", title: "Química general", unlocks: ["1CAY06", "1CAY07"], requirements: [] },
+  { code: "1CAY39", title: "Procesos de innovación en bioingeniería", unlocks: ["1CAY41"], requirements: [] },
+  { code: "CDR123", title: "Pensamiento cristiano y realidad social", unlocks: [], requirements: [] },
 
-  // Ciclo 3
-  "1MAT07": { nombre: "Cálculo integral", ciclo: 3, abre: ["1MAT23"], req: ["1MAT06"] },
-  "1FIS04": { nombre: "Física 2", ciclo: 3, abre: ["1FIS06"], req: ["1FIS02", "1FIS03", "1MAT07"] },
-  "1FIS05": { nombre: "Laboratorio de Física 2", ciclo: 3, abre: ["1FIS06"], req: ["1FIS02", "1FIS03"] },
-  "1INF01": { nombre: "Fundamentos de programación", ciclo: 3, abre: ["1CAY46", "1IEE09"], req: [] },
-  "1CAY06": { nombre: "Química orgánica", ciclo: 3, abre: ["1CAY40", "1CAY45"], req: ["1CAY38"] },
-  "1CAY07": { nombre: "Biología", ciclo: 3, abre: ["1CAY44", "1CAY45"], req: ["1CAY06"] },
+  // Tercer Ciclo
+  { code: "1MAT07", title: "Cálculo integral", unlocks: ["1MAT23"], requirements: ["1MAT06"] },
+  { code: "1FIS04", title: "Física 2", unlocks: ["1FIS06"], requirements: ["1FIS02", "1FIS03"] },
+  { code: "1FIS05", title: "Laboratorio de física 2", unlocks: ["1FIS06"], requirements: ["1FIS02"] },
+  { code: "1INF01", title: "Fundamentos de programación", unlocks: ["1CAY46", "1IEE09"], requirements: [] },
+  { code: "1CAY06", title: "Química orgánica", unlocks: ["1CAY40", "1CAY45"], requirements: ["1CAY38"] },
+  { code: "1CAY07", title: "Biología", unlocks: ["1CAY44", "1CAY45"], requirements: ["1CAY06"] },
 
-  // Ciclo 4
-  "1MAT23": { nombre: "Cálculo vectorial", ciclo: 4, abre: ["1MAT32", "1CAY43"], req: ["1MAT07"] },
-  "1FIS06": { nombre: "Física 3", ciclo: 4, abre: ["1IBM14", "1IBM15"], req: ["1FIS04", "1FIS05"] },
-  "1FIS07": { nombre: "Laboratorio de Física 3", ciclo: 4, abre: [], req: ["1FIS06"] },
-  "1CAY40": { nombre: "Fund. de análisis instrumental", ciclo: 4, abre: [], req: ["1CAY06"] },
-  "1IEE08": { nombre: "Circuitos eléctricos", ciclo: 4, abre: ["1IEE09"], req: [] },
-  "1CAY41": { nombre: "Fund. de biodiseño", ciclo: 4, abre: [], req: ["1CAY39"] },
+  // Cuarto Ciclo
+  { code: "1MAT23", title: "Cálculo vectorial", unlocks: ["1MAT32", "1CAY43"], requirements: ["1MAT07"] },
+  { code: "1FIS06", title: "Física 3", unlocks: ["1IBM14", "1CAY48"], requirements: ["1FIS04", "1IEE08"] },
+  { code: "1FIS07", title: "Laboratorio de física 3", unlocks: [], requirements: ["1FIS06"] },
+  { code: "1CAY40", title: "Fundamentos de análisis instrumental", unlocks: [], requirements: ["1CAY06"] },
+  { code: "1IEE08", title: "Circuitos eléctricos", unlocks: ["1IEE09"], requirements: [] },
+  { code: "1CAY41", title: "Fundamentos de biodiseño", unlocks: [], requirements: ["1CAY39"] },
 
-  // Ciclo 5
-  "1MAT32": { nombre: "Series y transformadas", ciclo: 5, abre: ["1IBM03", "1ING09"], req: ["1MAT23"] },
-  "1CAY44": { nombre: "Anatomía y fisiología", ciclo: 5, abre: ["1CAY49"], req: ["1CAY07"] },
-  "1CAY45": { nombre: "Bioquímica", ciclo: 5, abre: ["1CAY14", "1CAY47"], req: ["1CAY06", "1CAY07"] },
-  "1CAY46": { nombre: "Programación avanzada", ciclo: 5, abre: [], req: ["1INF01"] },
-  "1IBM14": { nombre: "Ciencia e Ing. de materiales", ciclo: 5, abre: ["1ING06", "1ING07", "1CAY15"], req: ["1FIS06"] },
-  "1IEE09": { nombre: "Circuitos y sistemas digitales", ciclo: 5, abre: ["1IEE10"], req: ["1INF01", "1IEE08"] },
+  // Quinto Ciclo
+  { code: "1MAT32", title: "Series y Transformadas", unlocks: ["1IBM03", "1ING09"], requirements: ["1MAT23"] },
+  { code: "1CAY44", title: "Anatomía y Fisiología", unlocks: ["1CAY49"], requirements: ["1CAY07"] },
+  { code: "1CAY45", title: "Bioquímica", unlocks: ["1CAY14", "1CAY47"], requirements: ["1CAY06", "1CAY07"] },
+  { code: "1CAY46", title: "Programación Avanzada", unlocks: [], requirements: ["1INF01"] },
+  { code: "1IBM14", title: "Ciencia e Ingeniería de Materiales", unlocks: ["1ING06", "1ING07", "1CAY15"], requirements: ["1FIS06"] },
+  { code: "1IEE09", title: "Circuitos y Sistemas Digitales", unlocks: ["1IEE10"], requirements: ["1IEE08", "1INF01"] },
 
-  // Ciclo 6
-  "1CAY14": { nombre: "Microbiología y cultivo celular", ciclo: 6, abre: ["1CAY21"], req: ["1CAY45"] },
-  "1CAY47": { nombre: "Molecular biology for engineers", ciclo: 6, abre: [], req: ["1CAY45"] },
-  "1CAY48": { nombre: "Proyectos de biodiseño 1", ciclo: 6, abre: ["1IBM15"], req: ["1FIS06"] },
-  "1ING06": { nombre: "Fund. de mecánica de los biomateriales", ciclo: 6, abre: ["1ING10"], req: ["1IBM14"] },
-  "1IEE10": { nombre: "Electrónica básica", ciclo: 6, abre: ["1CAY50", "1CAY51"], req: ["1IEE09"] },
-  "1ING09": { nombre: "Digital Signal Processing", ciclo: 6, abre: ["ING340"], req: ["1MAT32"] },
+  // Sexto Ciclo
+  { code: "1CAY14", title: "Microbiología y Cultivo Celular", unlocks: ["1CAY21"], requirements: ["1CAY45"] },
+  { code: "1CAY47", title: "Molecular biology for engineers", unlocks: [], requirements: ["1CAY45"] },
+  { code: "1CAY48", title: "Proyectos de Biodiseño 1", unlocks: ["1IBM15"], requirements: ["1CAY41", "1FIS06"] },
+  { code: "1ING06", title: "Fundamentos de Mecánica de los Biomateriales", unlocks: ["1ING10"], requirements: ["1IBM14"] },
+  { code: "1IEE10", title: "Electrónica Básica", unlocks: ["1CAY50", "1CAY51"], requirements: ["1IEE09"] },
+  { code: "1ING09", title: "Digital Signal Processing", unlocks: ["ING340"], requirements: ["1MAT32"] },
 
-  // Ciclo 7
-  "1CAY15": { nombre: "Mecánica y transporte de fluidos", ciclo: 7, abre: [], req: ["1IBM14"] },
-  "1CAY43": { nombre: "Bioestadística", ciclo: 7, abre: [], req: ["1MAT23"] },
-  "1CAY49": { nombre: "Fisiopatología", ciclo: 7, abre: [], req: ["1CAY44"] },
-  "1CAY50": { nombre: "Instrumentación biomédica", ciclo: 7, abre: ["1IBM16"], req: ["1IEE10"] },
-  "1CAY51": { nombre: "Intro a señales biomédicas", ciclo: 7, abre: [], req: ["1IEE10"] },
-  "1IBM15": { nombre: "Proyectos de biodiseño 2", ciclo: 7, abre: ["1CAY52"], req: ["1CAY48"] },
-  "1ING07": { nombre: "Biomateriales", ciclo: 7, abre: [], req: ["1IBM14"] },
+  // Séptimo Ciclo
+  { code: "1CAY15", title: "Mecánica y Transporte de Fluidos", unlocks: [], requirements: ["1IBM14"] },
+  { code: "1CAY43", title: "Bioestadística", unlocks: [], requirements: ["1MAT23"] },
+  { code: "1CAY49", title: "Fisiopatología", unlocks: [], requirements: ["1CAY44"] },
+  { code: "1CAY50", title: "Instrumentación Biomédica", unlocks: ["1IBM16"], requirements: ["1IEE10"] },
+  { code: "1CAY51", title: "Introducción a Señales Biomédicas", unlocks: [], requirements: ["1IEE10"] },
+  { code: "1IBM15", title: "Proyectos de Biodiseño 2", unlocks: ["1CAY52"], requirements: ["1CAY48"] },
+  { code: "1ING07", title: "Biomateriales", unlocks: [], requirements: ["1IBM14"] },
 
-  // Ciclo 8
-  "1IBM16": { nombre: "Ingeniería clínica 1", ciclo: 8, abre: ["1CAY53"], req: ["1CAY50"] },
-  "1CAY21": { nombre: "Intro a ingeniería de tejidos", ciclo: 8, abre: [], req: ["1CAY14"] },
-  "1CAY36": { nombre: "Antropología", ciclo: 8, abre: [], req: [] },
-  "1CAY52": { nombre: "Modelos de negocios en bioingeniería", ciclo: 8, abre: ["1CAY57"], req: ["1IBM15"] },
-  "1IBM03": { nombre: "Teoría de control en sistemas biológicos", ciclo: 8, abre: [], req: ["1MAT32"] },
-  "1ING10": { nombre: "Biomecánica", ciclo: 8, abre: [], req: ["1ING06"] },
-  "ING340": { nombre: "Intro to Medical Imaging", ciclo: 8, abre: [], req: ["1ING09"] },
+  // Octavo Ciclo
+  { code: "1IBM16", title: "Ingeniería Clínica 1", unlocks: ["1CAY53"], requirements: ["1CAY50"] },
+  { code: "1CAY21", title: "Introducción a Ingeniería de Tejidos", unlocks: [], requirements: ["1CAY14"] },
+  { code: "1CAY36", title: "Antropología", unlocks: [], requirements: [] },
+  { code: "1CAY52", title: "Modelos de Negocios en Bioingeniería", unlocks: ["1CAY57"], requirements: ["1IBM15"] },
+  { code: "1IBM03", title: "Teoría de Control en Sistemas Biológicos", unlocks: [], requirements: ["1MAT32"] },
+  { code: "1ING10", title: "Biomecánica", unlocks: [], requirements: ["1ING06"] },
+  { code: "ING340", title: "Introduction to Medical Imaging", unlocks: [], requirements: ["1ING09"] },
 
-  // Ciclo 9
-  "1CAY53": { nombre: "Ingeniería clínica 2", ciclo: 9, abre: [], req: ["1IBM16"] },
-  "1CAY37": { nombre: "Ética", ciclo: 9, abre: [], req: [] },
-  "1CAY54": { nombre: "Desarrollo profesional 1", ciclo: 9, abre: ["1IBM18"], req: [] },
-  "1IBM18": { nombre: "Desarrollo profesional 2", ciclo: 9, abre: [], req: ["1CAY54"] },
-  "ELECTIVO1": { nombre: "Electivo de tesis 1", ciclo: 9, abre: [], req: [] },
-  "ELECTIVO2": { nombre: "Curso electivo 1", ciclo: 9, abre: [], req: [] },
-  "ELECTIVO3": { nombre: "Curso electivo 2", ciclo: 9, abre: [], req: [] },
+  // Noveno Ciclo
+  { code: "1CAY53", title: "Ingeniería Clínica 2", unlocks: [], requirements: ["1IBM16"] },
+  { code: "1CAY37", title: "Ética", unlocks: [], requirements: [] },
+  { code: "1CAY54", title: "Desarrollo Profesional en Bioingeniería 1", unlocks: ["1IBM18"], requirements: [] },
+  { code: "1IBM18", title: "Desarrollo Profesional en Bioingeniería 2", unlocks: ["1CAY56"], requirements: ["1CAY54"] },
 
-  // Ciclo 10
-  "1CAY56": { nombre: "Desarrollo profesional 3", ciclo: 10, abre: [], req: [] },
-  "1CAY57": { nombre: "Normas y regulaciones", ciclo: 10, abre: ["1IBM19"], req: ["1CAY52"] },
-  "1IBM19": { nombre: "Desarrollo profesional 4", ciclo: 10, abre: [], req: ["1CAY57"] },
-  "ELECTIVO4": { nombre: "Electivo de tesis 2", ciclo: 10, abre: [], req: [] },
-  "ELECTIVO5": { nombre: "Curso electivo 3", ciclo: 10, abre: [], req: [] },
-  "ELECTIVO6": { nombre: "Curso electivo 4", ciclo: 10, abre: [], req: [] },
-  "ELECTIVO7": { nombre: "Curso electivo 5", ciclo: 10, abre: [], req: [] },
-  "ELECTIVO8": { nombre: "Curso electivo 6", ciclo: 10, abre: [], req: [] }
-};
+  // Décimo Ciclo
+  { code: "1CAY56", title: "Desarrollo Profesional en Bioingeniería 3", unlocks: ["1IBM19"], requirements: ["1IBM18"] },
+  { code: "1CAY57", title: "Normas y Regulaciones en Bioingeniería", unlocks: [], requirements: ["1CAY52"] },
+  { code: "1IBM19", title: "Desarrollo Profesional en Bioingeniería 4", unlocks: [], requirements: ["1CAY56"] },
+];
 
-const malla = document.getElementById("malla");
+const courseState = {};
 
-function crearCiclos() {
-  for (let i = 1; i <= 10; i++) {
-    const columna = document.createElement("div");
-    columna.className = "ciclo";
-    columna.id = `ciclo${i}`;
-    const titulo = document.createElement("h2");
-    titulo.textContent = `Ciclo ${i}`;
-    columna.appendChild(titulo);
-    malla.appendChild(columna);
-  }
+function getCourseStatus(course) {
+  if (!course.requirements.length) return 'unlocked';
+  const allMet = course.requirements.every(req => courseState[req] === 'completed');
+  return allMet ? 'unlocked' : 'locked';
 }
 
-function mostrarCursos() {
-  for (let codigo in cursos) {
-    const curso = cursos[codigo];
-    const div = document.createElement("div");
-    div.className = "curso bloqueado";
-    div.id = codigo;
-    div.innerHTML = `<strong>${codigo}</strong><br>${curso.nombre}`;
+function renderCourses() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  courses.forEach(course => {
+    const status = courseState[course.code] || getCourseStatus(course);
+    courseState[course.code] = status;
 
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
-    tooltip.textContent = "Requiere: " + (curso.req.length ? curso.req.join(", ") : "Ninguno");
+    const div = document.createElement('div');
+    div.className = `course ${status}`;
+    div.dataset.code = course.code;
+
+    const code = document.createElement('div');
+    code.className = 'code';
+    code.textContent = course.code;
+
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = course.title;
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    if (status === 'locked') {
+      tooltip.textContent = `Falta: ${course.requirements.filter(req => courseState[req] !== 'completed').join(', ')}`;
+    }
+
+    div.appendChild(code);
+    div.appendChild(title);
     div.appendChild(tooltip);
 
-    div.addEventListener("click", () => aprobarCurso(codigo));
-    document.getElementById(`ciclo${curso.ciclo}`).appendChild(div);
-  }
-  actualizarEstado();
-}
-
-function aprobarCurso(codigo) {
-  const curso = document.getElementById(codigo);
-  if (!curso.classList.contains("bloqueado")) {
-    curso.classList.toggle("aprobado");
-    actualizarEstado();
-  }
-}
-
-function actualizarEstado() {
-  for (let codigo in cursos) {
-    const curso = cursos[codigo];
-    const div = document.getElementById(codigo);
-    const requisitos = curso.req;
-    const aprobados = requisitos.every(req => {
-      const elem = document.getElementById(req);
-      return elem && elem.classList.contains("aprobado");
-    });
-
-    if (requisitos.length === 0 || aprobados) {
-      div.classList.remove("bloqueado");
-    } else {
-      div.classList.add("bloqueado");
+    if (status !== 'locked') {
+      div.addEventListener('click', () => {
+        courseState[course.code] = 'completed';
+        course.unlocks.forEach(cod => {
+          if (courseState[cod] !== 'completed') {
+            const nextCourse = courses.find(c => c.code === cod);
+            courseState[cod] = getCourseStatus(nextCourse);
+          }
+        });
+        renderCourses();
+      });
     }
-  }
+
+    grid.appendChild(div);
+  });
 }
 
-crearCiclos();
-mostrarCursos();
+renderCourses();
