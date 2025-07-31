@@ -21,11 +21,11 @@ p {
 
 #malla {
   display: flex;
-  gap: 2rem;
+  flex-wrap: nowrap;
   overflow-x: auto;
+  gap: 2rem;
   padding-bottom: 1rem;
   scroll-snap-type: x mandatory;
-  width: 100%;
 }
 
 .ciclo {
@@ -36,7 +36,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 220px;
+  min-width: 240px;
   scroll-snap-align: start;
   flex-shrink: 0;
 }
