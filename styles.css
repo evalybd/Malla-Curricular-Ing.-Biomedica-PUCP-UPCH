@@ -1,80 +1,89 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #fdfdfd;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #e8f4fd;
   margin: 0;
-  padding: 20px;
+  padding: 2rem;
   color: #333;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  color: #4682b4;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
 }
 
 #malla {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2rem;
+  justify-content: center;
 }
 
 .ciclo {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 10px;
-  min-width: 220px;
-  flex-shrink: 0;
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  min-width: 220px;
 }
 
 .ciclo h2 {
+  color: #2c6faa;
   text-align: center;
-  font-size: 18px;
-  margin-bottom: 10px;
-  background-color: #0066cc;
-  color: white;
-  border-radius: 8px;
-  padding: 6px 0;
+  margin-bottom: 1rem;
 }
 
 .cursos {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
+  width: 100%;
 }
 
 .curso {
-  padding: 10px;
-  background-color: #f0f8ff;
-  border-left: 5px solid #007acc;
-  border-radius: 6px;
+  background-color: #b9d7ea;
+  border: 2px solid #87bdd8;
+  border-radius: 12px;
+  padding: 1rem;
   cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
   white-space: pre-line;
-  transition: all 0.3s ease;
+  min-height: 80px;
 }
 
 .curso:hover {
-  background-color: #e6f2ff;
+  background-color: #a2cde4;
+  transform: scale(1.03);
 }
 
-.aprobado {
+.curso.aprobado {
+  background-color: #ade8af;
+  border-color: #73d673;
   text-decoration: line-through;
-  background-color: #d4edda;
-  border-left-color: #28a745;
+  color: #447744;
 }
 
-.bloqueado {
-  background-color: #f8d7da;
-  border-left-color: #dc3545;
+.curso.bloqueado {
+  background-color: #eeeeee;
+  border-color: #cccccc;
+  color: #999;
   cursor: not-allowed;
-  opacity: 0.6;
 }
 
 #info {
-  margin-top: 20px;
-  font-style: italic;
-  color: #555;
+  margin-top: 2rem;
   text-align: center;
+  font-size: 1rem;
+  color: #c0392b;
+  min-height: 2em;
 }
