@@ -134,22 +134,19 @@ function renderCourses() {
       div.appendChild(tooltip);
 
       if (status !== 'locked') {
-        div.addEventListener('click', () => {
-          courseState[course.code] = 'completed';
-          course.unlocks.forEach(cod => {
-            if (courseState[cod] !== 'completed') {
-              const nextCourse = courses.find(c => c.code === cod);
-              courseState[cod] = getCourseStatus(nextCourse);
-            } //AQUI ESTA LO AÑADIDO DE LOS CLICKS NO TE OLVIDESSS
-      if (status !== 'locked') {
   div.addEventListener('click', () => {
-    courseState[course.code] = 'completed';
+    // Si ya estaba completado, lo desmarca
+    if (courseState[course.code] === 'completed') {
+      courseState[course.code] = 'unlocked';
+    } else {
+      courseState[course.code] = 'completed';
+    }
+
+    // Actualiza los cursos que dependían de este ACA ESTA LO Q ACTUALIZASTE
     course.unlocks.forEach(cod => {
-      if (courseState[cod] !== 'completed') {
-        const nextCourse = courses.find(c => c.code === cod);
-        courseState[cod] = getCourseStatus(nextCourse);
-      }
-    });
+      const nextCourse = courses.find(c => c.code === cod);
+      courseState[cod] = getCourseStatus(nextCourse);
+     });
     renderCourses();
   });
 }
