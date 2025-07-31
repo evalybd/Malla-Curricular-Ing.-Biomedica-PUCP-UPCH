@@ -1,6 +1,8 @@
+/* style.css */
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #eaf6ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e3f2fd;
   margin: 0;
   padding: 20px;
   color: #333;
@@ -8,49 +10,60 @@ body {
 
 h1 {
   text-align: center;
-  color: #2266aa;
+  color: #1565c0;
   margin-bottom: 40px;
 }
 
 #malla {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(250px, 1fr);
   gap: 20px;
   overflow-x: auto;
-  padding: 10px;
+  padding-bottom: 20px;
 }
 
 .ciclo {
-  background-color: #d0e8ff;
-  border-radius: 10px;
+  background-color: #bbdefb;
+  border-radius: 12px;
   padding: 10px;
+  height: fit-content;
   min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .ciclo h2 {
   text-align: center;
-  font-size: 1.2em;
-  color: #114477;
+  font-size: 1.2rem;
+  color: #0d47a1;
   margin-bottom: 10px;
+  border-bottom: 2px solid #90caf9;
+  padding-bottom: 5px;
 }
 
 .curso {
   background-color: #ffffff;
-  border: 2px solid #a3c9f1;
+  border: 2px solid #90caf9;
   border-radius: 8px;
   padding: 10px;
-  margin-bottom: 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
   position: relative;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
 .curso:hover {
-  background-color: #cce7ff;
+  background-color: #e1f5fe;
+  transform: scale(1.02);
 }
 
 .curso.aprobado {
   text-decoration: line-through;
-  background-color: #b2e0b2 !important;
+  background-color: #c8e6c9 !important;
+  border-color: #81c784;
+  color: #2e7d32;
 }
 
 .curso.bloqueado {
@@ -60,16 +73,19 @@ h1 {
 
 .tooltip {
   position: absolute;
-  background-color: #fff;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  padding: 6px;
   font-size: 0.8em;
   top: 100%;
   left: 0;
   z-index: 10;
   display: none;
   white-space: nowrap;
+  margin-top: 4px;
+  color: #0d47a1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .curso:hover .tooltip {
