@@ -87,12 +87,23 @@ function getCourseStatus(course) {
   const allMet = course.requirements.every(req => courseState[req] === 'completed');
   return allMet ? 'unlocked' : 'locked';
 }
-//MIau aca comienza el mambo
+function getCycleFromCode(code) {
+  if (["1MAT04", "1MAT05", "1FIS01", "1CAY01", "1CAY04", "1CAY42"].includes(code)) return 1;
+  if (["1MAT06", "1FIS02", "1FIS03", "1ING03", "1CAY38", "1CAY39", "CDR123"].includes(code)) return 2;
+  if (["1MAT07", "1FIS04", "1FIS05", "1INF01", "1CAY06", "1CAY07"].includes(code)) return 3;
+  if (["1MAT23", "1FIS06", "1FIS07", "1CAY40", "1IEE08", "1CAY41"].includes(code)) return 4;
+  if (["1MAT32", "1CAY44", "1CAY45", "1CAY46", "1IBM14", "1IEE09"].includes(code)) return 5;
+  if (["1CAY14", "1CAY47", "1CAY48", "1ING06", "1IEE10", "1ING09"].includes(code)) return 6;
+  if (["1CAY15", "1CAY43", "1CAY49", "1CAY50", "1CAY51", "1IBM15", "1ING07"].includes(code)) return 7;
+  if (["1IBM16", "1CAY21", "1CAY36", "1CAY52", "1IBM03", "1ING10", "ING340"].includes(code)) return 8;
+  if (["1CAY53", "1CAY37", "1CAY54", "1IBM18"].includes(code)) return 9;
+  if (["1CAY56", "1CAY57", "1IBM19"].includes(code)) return 10;
+  return 0; // En caso de que no encuentre coincidencia
+}
 function renderCourses() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
 
-  // Agrupar por ciclo
   const grouped = {};
   courses.forEach(course => {
     const cycle = getCycleFromCode(course.code);
@@ -100,8 +111,7 @@ function renderCourses() {
     grouped[cycle].push(course);
   });
 
-  // Mostrar columnas por ciclo
-  Object.keys(grouped).sort((a, b) => a - b).forEach(cycle => {
+  Object.keys(grouped).sort().forEach(cycle => {
     const column = document.createElement('div');
     column.className = 'cycle-column';
 
@@ -110,15 +120,11 @@ function renderCourses() {
     column.appendChild(heading);
 
     grouped[cycle].forEach(course => {
+      const status = courseState[course.code] || getCourseStatus(course);
+      courseState[course.code] = status;
+
       const div = document.createElement('div');
-      const status = courseState[course.code] || 'unlocked';
-      const actualStatus = getCourseStatus(course);
-      const isCompleted = courseState[course.code] === 'completed';
-
-      // Guardar estado actualizado
-      courseState[course.code] = isCompleted ? 'completed' : actualStatus;
-
-      div.className = `course ${courseState[course.code]}`;
+      div.className = `course ${status}`;
       div.dataset.code = course.code;
 
       const code = document.createElement('div');
@@ -131,7 +137,7 @@ function renderCourses() {
 
       const tooltip = document.createElement('div');
       tooltip.className = 'tooltip';
-      if (courseState[course.code] === 'locked') {
+      if (status === 'locked') {
         tooltip.textContent = `Falta: ${course.requirements.filter(req => courseState[req] !== 'completed').join(', ')}`;
       }
 
@@ -139,20 +145,16 @@ function renderCourses() {
       div.appendChild(title);
       div.appendChild(tooltip);
 
-      // Permitir toggle para cursos completados y desbloqueados
-      if (courseState[course.code] !== 'locked' || isCompleted) {
+      if (status !== 'locked') {
         div.addEventListener('click', () => {
-          // Toggle completed <-> unlocked
-          courseState[course.code] = isCompleted ? 'unlocked' : 'completed';
-
-          // Recalcular estado de todos
-          courses.forEach(c => {
-            if (courseState[c.code] !== 'completed') {
-              courseState[c.code] = getCourseStatus(c);
+          courseState[course.code] = 'completed';
+          course.unlocks.forEach(cod => {
+            if (courseState[cod] !== 'completed') {
+              const nextCourse = courses.find(c => c.code === cod);
+              courseState[cod] = getCourseStatus(nextCourse);
             }
           });
-
-          renderCourses(); // volver a dibujar
+          renderCourses();
         });
       }
 
@@ -162,3 +164,5 @@ function renderCourses() {
     grid.appendChild(column);
   });
 }
+
+renderCourses();
