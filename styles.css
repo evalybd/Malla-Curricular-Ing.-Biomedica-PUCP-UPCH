@@ -16,11 +16,21 @@ p {
   color: #555;
 }
 
-#malla {
+.ciclo {
+  margin-top: 2rem;
+}
+
+.ciclo h2 {
+  color: #4682b4;
+  border-bottom: 2px solid #87bdd8;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.cursos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
 }
 
 .curso {
@@ -42,6 +52,7 @@ p {
 .curso.aprobado {
   background-color: #ade8af;
   border-color: #73d673;
+  text-decoration: line-through;
 }
 
 .curso.bloqueado {
