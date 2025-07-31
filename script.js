@@ -92,7 +92,6 @@ function renderCourses() {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
 
-  // Agrupar cursos por ciclo
   const grouped = {};
   courses.forEach(course => {
     const cycle = getCycleFromCode(course.code);
@@ -100,8 +99,7 @@ function renderCourses() {
     grouped[cycle].push(course);
   });
 
-  // Crear columnas por ciclo
-  Object.keys(grouped).sort().forEach(cycle => {
+  Object.keys(grouped).sort((a, b) => a - b).forEach(cycle => {
     const column = document.createElement('div');
     column.className = 'cycle-column';
 
