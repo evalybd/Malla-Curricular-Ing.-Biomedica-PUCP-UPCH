@@ -14,8 +14,8 @@ header {
 }
 
 main#grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  overflow-x: auto;
   gap: 1rem;
   padding: 1rem;
 }
@@ -64,4 +64,19 @@ main#grid {
 
 .course.locked .tooltip {
   display: block;
+}
+.cycle-column {
+  min-width: 250px;
+  background-color: #ffffffee;
+  border-radius: 12px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.cycle-column h3 {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+  font-size: 1.1rem;
+  color: #336699;
 }
